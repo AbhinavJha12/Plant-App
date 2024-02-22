@@ -35,6 +35,16 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+    override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if(currentUser != null) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -49,12 +59,15 @@ class LoginActivity : AppCompatActivity() {
                     FirebaseAuth.getInstance().signInWithCredential(credential)
                         .addOnCompleteListener { signInTask ->
                             if (signInTask.isSuccessful) {
-                                val firebaseUser = FirebaseAuth.getInstance().currentUser
-                                Snackbar.make(
-                                    binding.root,
-                                    "Logged in with ${firebaseUser?.email}",
-                                    Snackbar.LENGTH_SHORT
-                                ).show()
+//                                val firebaseUser = FirebaseAuth.getInstance().currentUser
+//                                Snackbar.make(
+//                                    binding.root,
+//                                    "Logged in with ${firebaseUser?.email}",
+//                                    Snackbar.LENGTH_SHORT
+//                                ).show()
+                                val intent = Intent(this, MainActivity::class.java)
+                                startActivity(intent)
+                                finish()
                             } else {
                                 val e = signInTask.exception
                                 Log.w(TAG, "signInWithCredential:failure", e)
