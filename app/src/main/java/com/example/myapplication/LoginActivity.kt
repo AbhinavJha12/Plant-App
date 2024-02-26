@@ -59,12 +59,6 @@ class LoginActivity : AppCompatActivity() {
                     FirebaseAuth.getInstance().signInWithCredential(credential)
                         .addOnCompleteListener { signInTask ->
                             if (signInTask.isSuccessful) {
-//                                val firebaseUser = FirebaseAuth.getInstance().currentUser
-//                                Snackbar.make(
-//                                    binding.root,
-//                                    "Logged in with ${firebaseUser?.email}",
-//                                    Snackbar.LENGTH_SHORT
-//                                ).show()
                                 val intent = Intent(this, MainActivity::class.java)
                                 startActivity(intent)
                                 finish()
